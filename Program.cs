@@ -27,11 +27,19 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-app.MapGet("/hello", ()=>{
-    return "Get method: hello";
-});
-app.MapDelete("/hello", ()=>{
-    return "Delete method: hello";
+var products = new List<Product>{
+    new Product("Samsung", 1200),
+    new Product ("Apple", 1400)
+};
+
+app.MapGet("/products", ()=>{
+    return Results.Ok(
+        products
+    );
 });
 
+
 app.Run();
+
+public record Product(string Name, decimal Price);
+
